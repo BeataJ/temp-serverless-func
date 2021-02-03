@@ -4,6 +4,6 @@
 exports.handler = async (event, contex, cb) => {
   return {
     statusCode: 200,
-    body: 'Our First Netlify Function',
+    body: 'Our First Netlify Function Example',
   };
 };
