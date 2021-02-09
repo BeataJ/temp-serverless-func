@@ -10,11 +10,22 @@ exports.handler = async (event, contex, cb) => {
   if (id) {
     try {
       const product = await airtable.retrieve(id);
-    } catch (error) {}
-    return {
-      statusCode: 200,
-      body: 'Single Product',
-    };
+      if (product.error) {
+        return {
+          statusCode: 404,
+          body: `No product with id: ${id}`,
+        };
+      }
+      return {
+        statusCode: 200,
+        body: JSON.stringify(product),
+      };
+    } catch (error) {
+      return {
+        statusCode: 500,
+        body: `Server Error`,
+      };
+    }
   }
   return {
     statusCode: 400,
